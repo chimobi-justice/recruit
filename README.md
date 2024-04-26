@@ -1,4 +1,4 @@
-# About ESTUDY
+# About Recruit
 
 Recruit is a job application which give users all they need from the job market 
 
