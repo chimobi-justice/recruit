@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active {
+    color: rgba(0, 0, 255, 1) !important;
+}
+
+.ant-menu-submenu-title {
+    color: #000 !important;
+}
