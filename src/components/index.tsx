@@ -1,19 +1,23 @@
 import Avatar from "./Avatar"
 import Button from "./Button"
-import NavBar from "./Navigation"
-import Input  from "./TextInput"
-import Header from "./Header"
-import Skeleton from "./Skeleton"
-import NotFound from "./NotFound"
+import FooterBox from "./Footer"
+import HeroSection from "./HeroSection"
+import Input from "./TextInput"
+import JobCard from "./JobCard"
 import Modal from "./Modal"
+import NavBar from "./Navigation"
+import NotFound from "./NotFound"
+import Skeleton from "./Skeleton"
 
 export {
-    Avatar,
-    Button,
-    NavBar,
-    Input,
-    Header,
-    Skeleton,
-    NotFound,
-    Modal,
+  Avatar,
+  Button,
+  FooterBox,
+  HeroSection,
+  Input,
+  JobCard,
+  Modal,
+  NavBar,
+  NotFound,
+  Skeleton,
 }

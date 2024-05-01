@@ -3,7 +3,7 @@ import getMenuItems from "./getMenuItems"
 import truncate from "./truncate"
 
 export {
-    formatDate,
-    getMenuItems,
-    truncate,
+  formatDate,
+  getMenuItems,
+  truncate,
 }
