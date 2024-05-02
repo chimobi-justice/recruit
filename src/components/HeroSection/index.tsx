@@ -1,11 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 import { Col, Row, Typography } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { Input } from "../index"
+import { useNavigate } from "react-router-dom";
+import { useSearch } from "../../context/SearchContext";
 
 const { Title } = Typography;
 
 const HeroSection: React.FunctionComponent = () => {
+  const [search, setSearch] = useState<string>("");
+  const navigate = useNavigate();
+
+  const { setSearch: setSearchContext } = useSearch();
+
+  const handleSearch = (e: any) => {
+    setSearchContext(e.target.value)
+    setSearch(e.target.value);
+    
+    if (search.trim() !== '') {
+      navigate('/search');
+    }
+  };
+
   return (
     <section className="py-20 h-full bg-primary-300 mb-20 text-center">
       <Row className="w-11/12 mx-auto">
@@ -20,8 +36,10 @@ const HeroSection: React.FunctionComponent = () => {
               name=""
               type="search"
               size="large"
+              value={search}
               prefix={<SearchOutlined />}
-              placeholder="Search jobs"
+              placeholder="Search job by title or description..."
+              onChange={handleSearch}
             />
         </Col>
       </Row>

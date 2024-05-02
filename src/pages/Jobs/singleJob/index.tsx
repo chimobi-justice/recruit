@@ -15,7 +15,7 @@ const JobDetails: React.FunctionComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedUrl, setSelectedUrl] = useState<string | null>(null);
 
-  const { jobs, isLoading, isError } = useContext(JobContext);
+  const { jobs, isLoading } = useContext(JobContext);
 
   const { id } = useParams();
 
@@ -49,8 +49,6 @@ const JobDetails: React.FunctionComponent = () => {
       {isLoading && <Skeleton />}
 
       {notFound && <NotFound />}
-
-      {isError && console.log('Opps something went wrong')}
 
       {jobDetails && (
         <Row gutter={16}>

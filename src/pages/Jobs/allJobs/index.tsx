@@ -17,8 +17,7 @@ const AllJobs: React.FunctionComponent = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading,
-    isError
+    isLoading
   } = useInfiniteQuery({
     queryKey: ['all-jobs'],
     queryFn: fetchAllJobs,
@@ -34,8 +33,6 @@ const AllJobs: React.FunctionComponent = () => {
   return (
     <>
       {isLoading && <Skeleton />}
-
-      {isError && <div>Error: something went wrong</div>}
 
       <Row gutter={8}>
         {data && data?.pages?.map((page, pageIndex) => (
