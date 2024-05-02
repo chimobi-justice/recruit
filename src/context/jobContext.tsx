@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BaseUrl, fetchData } from "../utils";
 import { IJob, JobContextValue } from "../types";
+import { SearchContextProvider } from "./SearchContext";
 
 export const JobContext = createContext<JobContextValue>({
   jobs: null,
@@ -10,7 +11,7 @@ export const JobContext = createContext<JobContextValue>({
   setLimit: () => {}
 });
 
-const JobContextProvider = ({ children }: { children: ReactNode }) => {
+export const JobContextProvider = ({ children }: { children: ReactNode }) => {
   const [limit, setLimit] = useState<number>(0);
 
   const { data: jobResponse, isLoading, isError } = useQuery({
@@ -26,9 +27,12 @@ const JobContextProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <JobContext.Provider value={{ jobs, isLoading, isError, setLimit: updateLimit }}>
-      {children}
+      <SearchContextProvider>
+        {children}
+      </SearchContextProvider>
     </JobContext.Provider>
   );
 };
 
-export default JobContextProvider;
+export const useJobs = () => useContext(JobContext);
+

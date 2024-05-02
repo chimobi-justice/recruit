@@ -26,6 +26,11 @@ export interface JobContextValue {
   setLimit: (limit: number) => void;
 }
 
+export interface SearchContextType {
+  search: string;
+  setSearch: (value: string) => void;
+}
+
 export interface IAvatar {
   size: "small" | "large" | "default" | number;
   shape: "circle" | "square";
@@ -58,7 +63,6 @@ export interface IInput {
   iconRender?: any;
   style?: CSSProperties;
 }
-
 
 export interface IModal {
   title: string;

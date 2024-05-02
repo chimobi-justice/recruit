@@ -1,13 +1,13 @@
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import { Row, Typography } from "antd"
 import Categories from "./components/Category"
 import { JobCard, Skeleton } from "../../components"
-import { JobContext } from "../../context/jobContext"
+import { useJobs } from "../../context/jobContext"
 
 const { Title } = Typography;
 
 const Home = () => {
-  const { jobs, isLoading, isError, setLimit } = useContext(JobContext);
+  const { jobs, isLoading, setLimit } = useJobs();
 
   useEffect(() => {
     setLimit(10)
@@ -23,8 +23,6 @@ const Home = () => {
         </div>
 
         {isLoading && <Skeleton />}
-
-        {isError && console.log('Opps something went wrong')}
 
         <Row>
           {
