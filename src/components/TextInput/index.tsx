@@ -11,26 +11,7 @@ const Input: React.FunctionComponent<IInput> = ({
   prefix,
   className,
   onChange,
-  iconRender,
-  style
 }) => {
-  if (type === "password") {
-    return (
-      <AntInput.Password
-        type={type}
-        name={name}
-        value={value}
-        size={size}
-        placeholder={placeholder}
-        className={className}
-        onChange={onChange}
-        prefix={prefix}
-        iconRender={iconRender}
-        style={style}
-      />
-    );
-  }
-
   return (
     <AntInput
       type={type}
@@ -41,7 +22,6 @@ const Input: React.FunctionComponent<IInput> = ({
       className={className}
       onChange={onChange}
       prefix={prefix}
-      style={style}
     />
   )
 }

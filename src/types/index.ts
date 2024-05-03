@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, CSSProperties } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export interface IJob {
   id: number;
@@ -17,13 +17,6 @@ export interface IJob {
 
 export interface IData {
   jobs: IJob[];
-}
-
-export interface JobContextValue {
-  jobs: IJob[] | null;
-  isLoading: boolean;
-  isError: boolean;
-  setLimit: (limit: number) => void;
 }
 
 export interface SearchContextType {
@@ -60,8 +53,6 @@ export interface IInput {
   prefix?: ReactElement;
   className?: string;
   onChange?: (e: any) => void;
-  iconRender?: any;
-  style?: CSSProperties;
 }
 
 export interface IModal {

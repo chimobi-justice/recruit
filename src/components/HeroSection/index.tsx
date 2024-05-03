@@ -14,8 +14,8 @@ const HeroSection: React.FunctionComponent = () => {
   const { setSearch: setSearchContext } = useSearch();
 
   const handleSearch = (e: any) => {
-    setSearchContext(e.target.value)
     setSearch(e.target.value);
+    setSearchContext(e.target.value)
     
     if (search.trim() !== '') {
       navigate('/search');
@@ -23,10 +23,10 @@ const HeroSection: React.FunctionComponent = () => {
   };
 
   return (
-    <section className="py-20 h-full bg-primary-300 mb-20 text-center">
-      <Row className="w-11/12 mx-auto">
+    <section className="py-10 md:py-20 px-3 lg:px-0 bg-primary-300 mb-10 md:mb-20 text-center">
+      <Row className="container mx-auto">
         <Col span={24}>
-          <Title level={1} style={{ marginTop: '0em', marginBottom: '0.2em', color: '#9d9d9d', fontSize: '6em' }}>Boost Your Career</Title>
+          <Title level={1} style={{ marginTop: '0em', marginBottom: '0.2em', color: '#9d9d9d', fontSize: '5.4vw', fontWeight: 'bold' }}>Boost Your Career</Title>
           <p className="text-sm text-gray-600 font-semibold leading-7">Discover a platform tailored for passionate job seeker interested in startup.</p>
           <p className="text-sm text-gray-600 font-semibold leading-7">Find Your next career oppornuty and connect with like minded individuals.</p>
         </Col>

@@ -17,7 +17,8 @@ const AllJobs: React.FunctionComponent = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading
+    isLoading,
+    isSuccess
   } = useInfiniteQuery({
     queryKey: ['all-jobs'],
     queryFn: fetchAllJobs,
@@ -31,11 +32,11 @@ const AllJobs: React.FunctionComponent = () => {
   })
 
   return (
-    <>
+    <section className="w-11/12 mx-auto pb-10">
       {isLoading && <Skeleton />}
 
       <Row gutter={8}>
-        {data && data?.pages?.map((page, pageIndex) => (
+        {data && isSuccess && data?.pages?.map((page, pageIndex) => (
           <React.Fragment key={pageIndex}>
             {page?.jobs?.map((job: IJob) => (
               <JobCard job={job} key={job?.id}/>
@@ -62,7 +63,7 @@ const AllJobs: React.FunctionComponent = () => {
           </Col>
         </Row>
       </Row>
-    </>
+    </section>
   );
 }
 

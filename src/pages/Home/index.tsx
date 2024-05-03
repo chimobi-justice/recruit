@@ -1,17 +1,18 @@
-import { useEffect } from "react"
-import { Row, Typography } from "antd"
+import { Row, Typography, Grid } from "antd"
 import Categories from "./components/Category"
 import { JobCard, Skeleton } from "../../components"
-import { useJobs } from "../../context/jobContext"
+import useJobs from "../../hooks/useJobs"
 
 const { Title } = Typography;
 
-const Home = () => {
-  const { jobs, isLoading, setLimit } = useJobs();
+const { useBreakpoint } = Grid;
 
-  useEffect(() => {
-    setLimit(10)
-  }, [setLimit])
+const Home = () => {
+  const { jobs, isLoading, isSuccess, isError } = useJobs('jobs', 10);
+
+  const { lg } = useBreakpoint();
+
+  const titleFontSize = lg ? '36px' : '24px';
 
   return (
     <section>
@@ -19,14 +20,16 @@ const Home = () => {
 
       <div className="w-11/12 mx-auto pb-10">
         <div className="my-10">
-          <Title level={1} style={{ color: 'rgba(156, 156, 255, 1)' }}>Explore <span className="text-blue-800">jobs</span></Title>
+          <Title level={1} style={{ fontSize: titleFontSize, color: 'rgba(156, 156, 255, 1)' }}>Explore <span className="text-blue-800">jobs</span></Title>
         </div>
 
         {isLoading && <Skeleton />}
 
+        {isError && <p>Error: fetching jobs...</p>}
+
         <Row>
-          {
-            jobs?.map((job) => (
+          {jobs && isSuccess &&
+            jobs?.map((job: any) => (
               <JobCard job={job} key={job?.id}/>
             ))
           }
