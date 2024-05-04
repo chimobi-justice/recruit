@@ -1,11 +1,11 @@
-import React from "react"
+import { FunctionComponent } from "react"
 import { Outlet } from "react-router-dom";
 import { Layout as LayoutContainer, theme } from "antd"
 import { FooterBox, HeroSection, NavBar } from "../components"
 
 const { Header, Content, Footer } = LayoutContainer;
 
-const Layout: React.FunctionComponent<Record<string, never>> = () => {
+const Layout: FunctionComponent<Record<string, never>> = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();

@@ -4,7 +4,7 @@ const NotFound = () => {
   return (
     <Result
       status="404"
-      subTitle="Sorry, we can't find your search."
+      subTitle="Opps, try find your search."
     />
   )
 }

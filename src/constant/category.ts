@@ -1,0 +1,16 @@
+export const categoryData = [
+  { name: "Software Development", slug: "software-dev" },
+  { name: "Design", slug: "design" },
+  { name: "Customer Service", slug: "customer-support" },
+  { name: "Sales / Business", slug: "sales-business" },
+  { name: "Product", slug: "product" },
+  { name: "Project Management", slug: "project-management" },
+  { name: "Data Analysis", slug: "data" },
+  { name: "DevOps / Sysadmin", slug: "devops" },
+  { name: "Human Resources", slug: "hr" },
+  { name: "QA", slug: "qa" },
+  { name: "Writing", slug: "writing" },
+  { name: "Finance / Legal", slug: "finance-legal" },
+  { name: "Marketing", slug: "marketing" },
+  { name: "All others", slug: "all-others" },
+];

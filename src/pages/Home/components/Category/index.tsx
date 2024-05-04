@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom"
 import { Card, Col, Row, Space, Typography, Grid } from "antd"
-import { Avatar } from "../../../../components";
-import { BorderLeftOutlined } from "@ant-design/icons";
+import { BorderLeftOutlined } from "@ant-design/icons"
+import { Avatar } from "../../../../components"
+import { categoryData } from "../../../../constant/category"
 
 const { Title } = Typography;
 
@@ -10,17 +12,6 @@ const Categories = () => {
   const { lg } = useBreakpoint();
 
   const titleFontSize = lg ? '36px' : '24px';
-
-  const categoryData = [
-    { name: "Software Development" },
-    { name: "Design" },
-    { name: "Customer Service" },
-    { name: "Sales / Business" },
-    { name: "Product" },
-    { name: "Project Management" },
-    { name: "Data Analysis" },
-    { name: "DevOps / Sysadmin" },
-  ];
 
   return (
     <section className="pb-10 bg-white">
@@ -32,12 +23,14 @@ const Categories = () => {
         <Row gutter={[16, 24]}>
           {categoryData.map((category, index) => (
             <Col key={index} xl={6} md={8} sm={12} xs={24}>
-              <Card key={index}>
-                <Space direction="horizontal" align="center">
-                  <Avatar size="large" shape="square" icon={<BorderLeftOutlined />} />
-                  <Title level={5}>{category.name}</Title>
-                </Space>
-              </Card>
+              <Link to={`/jobs/category/${category.slug}`}>
+                <Card key={index} className="hover:bg-primary-300 hover:transition-all hover:ease-in-out hover:delay-75">
+                  <Space direction="horizontal" align="center">
+                    <Avatar size="large" shape="square" icon={<BorderLeftOutlined />} />
+                    <Title level={5}>{category.name}</Title>
+                  </Space>
+                </Card>
+              </Link>
             </Col>
           ))}
         </Row>

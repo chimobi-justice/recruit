@@ -1,14 +1,14 @@
 import { Row, Typography, Grid } from "antd"
 import Categories from "./components/Category"
 import { JobCard, Skeleton } from "../../components"
-import useJobs from "../../hooks/useJobs"
+import { useJobs } from "../../hooks"
 
 const { Title } = Typography;
 
 const { useBreakpoint } = Grid;
 
 const Home = () => {
-  const { jobs, isLoading, isSuccess, isError } = useJobs('jobs', 10);
+  const { jobs, isLoading, isSuccess } = useJobs('jobs', 10);
 
   const { lg } = useBreakpoint();
 
@@ -25,12 +25,10 @@ const Home = () => {
 
         {isLoading && <Skeleton />}
 
-        {isError && <p>Error: fetching jobs...</p>}
-
         <Row>
           {jobs && isSuccess &&
             jobs?.map((job: any) => (
-              <JobCard job={job} key={job?.id}/>
+              <JobCard job={job} key={job?.id} />
             ))
           }
         </Row>

@@ -1,8 +1,8 @@
-import React from "react"
+import { FunctionComponent } from "react"
 import { Button as AntButton } from "antd"
-import { IButton } from "../../types";
+import { IButton } from "../../types"
 
-const Button: React.FunctionComponent<IButton> = ({
+const Button: FunctionComponent<IButton> = ({
   type,
   htmlType,
   children,

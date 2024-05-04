@@ -1,8 +1,8 @@
-import React from "react"
+import { FunctionComponent } from "react"
 import { Input as AntInput } from "antd"
 import { IInput } from "../../types"
 
-const Input: React.FunctionComponent<IInput> = ({
+const Input: FunctionComponent<IInput> = ({
   type,
   name,
   value,

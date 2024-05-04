@@ -1,8 +1,8 @@
-import React from "react"
+import { FunctionComponent } from "react"
 import { Modal as AntModal } from "antd"
 import { IModal } from "../../types"
 
-const Modal: React.FunctionComponent<IModal> = ({ title, open, onOk, onCancel, children }) => {
+const Modal: FunctionComponent<IModal> = ({ title, open, onOk, onCancel, children }) => {
   return (
     <AntModal
       title={title}

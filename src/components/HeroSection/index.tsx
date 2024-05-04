@@ -1,13 +1,13 @@
-import React, { useState } from "react"
+import { FunctionComponent, useState } from "react"
 import { Col, Row, Typography } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { Input } from "../index"
-import { useNavigate } from "react-router-dom";
-import { useSearch } from "../../context/SearchContext";
+import { useNavigate } from "react-router-dom"
+import { useSearch } from "../../context/SearchContext"
 
 const { Title } = Typography;
 
-const HeroSection: React.FunctionComponent = () => {
+const HeroSection: FunctionComponent = () => {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate();
 

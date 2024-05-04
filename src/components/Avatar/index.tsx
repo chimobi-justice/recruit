@@ -1,8 +1,8 @@
-import React from "react"
+import { FunctionComponent } from "react"
 import { Avatar as AntAvatar } from "antd"
 import { IAvatar } from "../../types"
 
-const Avatar: React.FunctionComponent<IAvatar> = ({
+const Avatar: FunctionComponent<IAvatar> = ({
   size,
   shape,
   alt,
