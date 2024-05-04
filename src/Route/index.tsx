@@ -6,17 +6,17 @@ import {
 
 import Layout from '../Layout'
 import Home from '../pages/Home'
-import Job from '../pages/Jobs'
-import JobDetails from '../pages/Jobs/singleJob'
 import Search from '../pages/Search'
+import AllJobs from '../pages/Jobs/allJobs'
+import SingleJobDetails from '../pages/Jobs/singleJob'
 
 const pageRoutes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path='/search' element={<Search />} />
-      <Route path='/jobs' element={<Job />} />
-      <Route path='/jobs/:id/overview' element={<JobDetails />} />
+      <Route path='/jobs' element={<AllJobs />} />
+      <Route path='/jobs/:id/overview' element={<SingleJobDetails />} />
     </Route>
   )
 )

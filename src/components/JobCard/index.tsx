@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Row, Col, Card, Flex, Space, Typography, Tag, Divider } from "antd"
+import { Row, Col, Card, Space, Typography, Tag, Divider} from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
 import { formatDate, truncate } from "../../helpers"
 import { Avatar, Button, Modal } from "../index"
@@ -34,39 +34,33 @@ const JobCard = ({ job }: { job: IJob }) => {
       <Col span={24}>
         <Card className="bg-primary-300">
           <Row align="middle">
-            <Col span={16} className="p-5">
-              <Flex align="center" gap={4}>
+            <Col xl={16} lg={14} md={14} sm={24} xs={24} className="p-5">
+              <Space direction="vertical">
                 <div>
-                  {job?.company_logo != null && (
-                    <Avatar size="large" shape="circle" src={job?.company_logo} />
-                  )}
-
-                  {job?.company_logo === null && (
-                    <Avatar size="large" shape="circle" />
-                  )}
+                  <Space align="center" >
+                    <Avatar
+                      size="large"
+                      shape="circle"
+                      src={job?.company_logo || ""}
+                    />
+                    <Title level={5}>{job?.title}</Title>
+                  </Space>
                 </div>
-
                 <div>
-                  <div>
-                    <Space align="center">
-                      <Title level={4}>{job?.title}</Title>
-                      <Title level={5}>&bull; {job?.company_name}</Title>
-                    </Space>
-                  </div>
-                  <div>
-                    <Space>
-                      <Tag>{job?.category}</Tag>
-                      {job?.salary ? (
-                        <Tag>{truncate(job?.salary, 60)}</Tag>
-                      ) : '|-'}
-                      <Tag>{job?.candidate_required_location}</Tag>
-                    </Space>
-                  </div>
+                  <Space wrap>
+                    <Tag>{job?.category}</Tag>
+                    {job?.salary ? (
+                      <Tag>{truncate(job?.salary, 60)}</Tag>
+                    ) : (
+                      <Tag>|-</Tag>
+                    )}
+                    <Tag>{job?.candidate_required_location}</Tag>
+                  </Space>
                 </div>
-              </Flex>
+              </Space>
             </Col>
 
-            <Col span={8} className="p-5">
+            <Col xl={8} lg={10} md={10} sm={24} xs={24}  className="p-5">
               <Space>
                 <div>
                   <p>{formatDate(job?.publication_date)}</p>

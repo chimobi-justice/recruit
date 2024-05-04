@@ -1,23 +1,28 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { Card, Col, Divider, Flex, Row, Tag, Typography } from "antd"
+import { Card, Col, Divider, Flex, Grid, Row, Space, Tag, Typography } from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
 import { Avatar, Button, Modal, NotFound, Skeleton } from "../../../components"
 import { formatDate, truncate } from "../../../helpers"
 import { IJob } from "../../../types"
-import { JobContext } from "../../../context/jobContext"
+import useJobs from "../../../hooks/useJobs"
 
 const { Title } = Typography;
+const { useBreakpoint } = Grid;
 
-const JobDetails: React.FunctionComponent = () => {
+const SingleJobDetails: React.FunctionComponent = () => {
   const [jobDetails, setJobDetails] = useState<IJob | null>(null);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedUrl, setSelectedUrl] = useState<string | null>(null);
 
-  const { jobs, isLoading } = useContext(JobContext);
+  const { jobs, isLoading, isSuccess, isError } = useJobs('job-details');
 
   const { id } = useParams();
+  
+  const { lg } = useBreakpoint();
+
+  const titleFontSize = lg ? '28px' : '22px';
 
   const showModal = (url: string) => {
     setIsModalOpen(true);
@@ -37,12 +42,17 @@ const JobDetails: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    if (id !== undefined && jobs && jobs.length > 0) {
+    if (id !== undefined && jobs && jobs?.length > 0) {
       const filterJob = jobs?.find((job: IJob) => job.id === parseInt(id, 10));
       filterJob ? setJobDetails(filterJob) : setNotFound(true);
     }
-
   }, [id, jobs]);
+
+  const createMarkup = () => {
+    return {
+      __html: jobDetails?.description || ''
+    }
+  }
 
   return (
     <section className="w-11/12 mx-auto">
@@ -50,25 +60,27 @@ const JobDetails: React.FunctionComponent = () => {
 
       {notFound && <NotFound />}
 
-      {jobDetails && (
+      {isError && <p>sorry you can try again.</p>}
+
+      {jobDetails && isSuccess && (
         <Row gutter={16}>
-          <Col span={18} className="pb-10">
+          <Col xl={16} lg={24} md={24} sm={24} xs={24} className="pb-10">
             <div className="my-5">
               <Link to="/jobs" className="text-black underline hover:text-gray-500 hover:underline">BACK TO ALL JOBS</Link>
             </div>
             <div className="my-5">
-              <Title level={3}>[Hiring] {jobDetails?.title} @{jobDetails?.company_name}</Title>
+              <Title level={3} style={{fontSize: titleFontSize}}>[Hiring] {jobDetails?.title} @{jobDetails?.company_name}</Title>
               <p className="text-sm">
                 {formatDate(jobDetails?.publication_date)} - {jobDetails?.company_name} is hiring a remote {jobDetails?.title} {jobDetails?.salary ? ` 💸Salary: ${jobDetails?.salary}` : ''} 📍Location: {jobDetails?.candidate_required_location}
               </p>
               <Divider />
             </div>
 
-            <div dangerouslySetInnerHTML={{ __html: jobDetails?.description || '' }} className="p-3 my-4" />
+            <div dangerouslySetInnerHTML={createMarkup()} className="p-3 my-4" />
           </Col>
 
-          <Col span={6} className="bg-primary-300 h-screen flex sticky top-0 p-5 items-center justify-center content-center">
-            <div>
+          <Col xl={8} lg={12} md={14} sm={24} xs={24} className="bg-primary-300 h-auto lg:h-screen flex sticky top-0 p-5 items-center justify-center content-center">
+            <div className="w-full">
               <div className="text-center my-5">
                 <Avatar size={64} shape="circle" src={jobDetails?.company_logo} />
                 <Title level={4}>{jobDetails?.title}</Title>
@@ -79,14 +91,20 @@ const JobDetails: React.FunctionComponent = () => {
                   <div className="mt-2 mb-5">
                     <Tag color="processing">{jobDetails?.category}</Tag>
                   </div>
-                  <Flex justify="space-between" gap={8}>
-                    <div>
+                  <Flex gap={8}>
+                    <div className="w-6/12 lg:w-4/12">
                       <p className="text-xs font-bold mb-1">💸SALARY</p>
-                      <p className="text-sm font-base bg-primary-300 p-1 rounded">{truncate(jobDetails?.salary ? `${jobDetails?.salary}` : '', 10)}</p>
+                      {jobDetails?.salary && (
+                        <p className="text-sm font-base bg-primary-300 p-1 rounded">{truncate(jobDetails?.salary, 10)}</p>
+                      )}
                     </div>
-                    <div>
+                    <div className="w-full">
                       <p className="text-xs font-bold mb-1">REMOTE LOCATION</p>
-                      <p className="text-sm font-base bg-primary-300 p-1 rounded">📍{truncate(jobDetails?.candidate_required_location, 15)}</p>
+                      <Space wrap>
+                        {jobDetails?.candidate_required_location?.split(',').map((location, index) => (
+                          <Tag key={index} color="processing">📍{location.trim()}</Tag>
+                        ))}
+                      </Space>
                     </div>
                   </Flex>
 
@@ -134,4 +152,4 @@ const JobDetails: React.FunctionComponent = () => {
   )
 }
 
-export default JobDetails;
+export default SingleJobDetails;
