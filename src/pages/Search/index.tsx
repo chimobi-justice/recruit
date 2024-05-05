@@ -1,9 +1,7 @@
-import React from "react"
+
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { Col, Row } from "antd"
 import { BaseUrl, fetchData } from "../../utils"
-import { Button, JobCard, NotFound, Skeleton } from "../../components"
-import { IJob } from "../../types"
+import { InfiniteJobList, NotFound, Skeleton } from "../../components"
 import { useSearch } from "../../context/SearchContext"
 
 const Search = () => {
@@ -16,11 +14,12 @@ const Search = () => {
   };
 
   const {
-    data,
+    data: jobs,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading
+    isLoading,
+    isSuccess
   } = useInfiniteQuery({
     queryKey: ['search-jobs', search],
     queryFn: searchAllJobs,
@@ -32,44 +31,26 @@ const Search = () => {
       return lastPage.prevOffset + 15
     }
   })
-  
+
   return (
     <div>
       <div className="w-11/12 mx-auto pb-10">
         {isLoading && <Skeleton />}
 
-        {!search && <NotFound />}
-
-        {search && data && data?.pages.map((page, pageIndex) => (
-          <React.Fragment key={pageIndex}>
-            {page.jobs.filter((job: any) =>
-              job.title.toLowerCase().includes(search.toLowerCase()) ||
-              job.description.toLowerCase().includes(search.toLowerCase())
-            ).map((job: IJob) => (
-              <Row key={job.id}>
-                <JobCard job={job} />
-              </Row>
-            ))}
-          </React.Fragment>
-        ))}
-
-        {search && data && hasNextPage && (
-
-          <Row className="w-full my-5">
-            <Col span={24} className="p-5 text-center">
-              {hasNextPage && (
-                <Button
-                  type="primary"
-                  htmlType="button"
-                  onClick={() => fetchNextPage()}
-                  disabled={isFetchingNextPage}
-                >
-                  {isFetchingNextPage ? "Loading..." : "Load More"}
-                </Button>
-              )}
-            </Col>
-          </Row>
+        {!search && !jobs?.pages  && (
+          <NotFound />
         )}
+
+        {search && jobs?.pages && (
+          <InfiniteJobList
+            jobs={jobs?.pages || []}
+            isSuccess={isSuccess}
+            isFetchingNextPage={isFetchingNextPage}
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+          />
+        )}
+
       </div>
     </div>
   );

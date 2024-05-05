@@ -19,6 +19,14 @@ export interface IData {
   jobs: IJob[];
 }
 
+export interface JobCardInfinteProps {
+  jobs: IJob[];
+  isSuccess: boolean;
+  hasNextPage: boolean; 
+  isFetchingNextPage: boolean; 
+  fetchNextPage: () => void;
+}
+
 export interface SearchContextType {
   search: string;
   setSearch: (value: string) => void;

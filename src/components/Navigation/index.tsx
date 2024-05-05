@@ -1,30 +1,68 @@
+import { useState } from "react"
 import { NavLink, Link } from "react-router-dom"
 import { Flex, Space, Typography, Grid } from "antd"
 import {
+  AlignRightOutlined,
+  CloseOutlined,
   FolderOpenOutlined,
-  HomeOutlined,
+  HomeOutlined
 } from "@ant-design/icons"
 
 const { Title } = Typography;
+
 const { useBreakpoint } = Grid;
 
 const NavBar = () => {
-  
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const { lg } = useBreakpoint();
 
   const titleFontSize = lg ? '30px' : '22px';
-  
-  return (
-    <Flex align="center" justify="space-between"  >
-      <Space direction="horizontal" align="center" size="large">
-        <Title level={2} style={{fontSize: titleFontSize}} className="mb-0"><Link to="/" style={{color: 'black'}}>Recruit</Link></Title>
-      </Space>
 
-      <Space direction="horizontal" size="large" className="text-black">
-        <NavLink to="/" className="text-black"><HomeOutlined /> Home</NavLink>
-        <NavLink to="/jobs" className="text-black"><FolderOpenOutlined /> Jobs</NavLink>
-      </Space>
-    </Flex>
+  const handleClick = () => {
+    setIsOpen((open) => !open);
+  }
+
+  return (
+    <>
+      <Flex align="center" justify="space-between">
+        <div>
+          <Title level={2} style={{ fontSize: titleFontSize, marginBottom: '0px' }}><Link to="/" style={{ color: 'black' }}>Recruit</Link></Title>
+        </div>
+
+        <div className="lg:block hidden">
+          <Space direction="horizontal" size="large">
+            <NavLink to="/" className="text-black"><HomeOutlined /> Home</NavLink>
+            <NavLink to="/jobs" className="text-black"><FolderOpenOutlined /> Jobs</NavLink>
+          </Space>
+        </div>
+
+        {!isOpen && (
+          <div className="block lg:hidden h-full" onClick={handleClick}>
+            <AlignRightOutlined className="text-3xl cursor-pointer" />
+          </div>
+        )}
+
+        {isOpen && (
+          <div className="block lg:hidden h-full" onClick={handleClick}>
+            <CloseOutlined className="text-3xl cursor-pointer" />
+          </div>
+        )}
+      </Flex>
+
+      {isOpen && (
+        <div className="bg-blue-800 absolute top-16 inset-x-0 w-full h-auto py-5 z-10 text-center transition-all duration-100 ease-in-out delay-200">
+          <ul className="my-10">
+            <li>
+              <Link to="/" className="text-black text-2xl text-white active:text-white"><HomeOutlined /> Home</Link>
+            </li>
+
+            <li>
+              <Link to="/jobs" className="text-black text-2xl text-white active:text-white"><FolderOpenOutlined /> Jobs</Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </>
   )
 }
 

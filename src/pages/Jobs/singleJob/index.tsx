@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Card, Col, Divider, Flex, Grid, Row, Space, Tag, Typography } from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
 import { Avatar, Button, Modal, NotFound, Skeleton } from "../../../components"
 import { formatDate, truncate } from "../../../helpers"
 import { IJob } from "../../../types"
-import useJobs from "../../../hooks/useJobs"
+import { useJobs } from "../../../hooks"
 
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
-const SingleJobDetails: React.FunctionComponent = () => {
+const SingleJobDetails: FunctionComponent = () => {
   const [jobDetails, setJobDetails] = useState<IJob | null>(null);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -19,7 +19,7 @@ const SingleJobDetails: React.FunctionComponent = () => {
   const { jobs, isLoading, isSuccess, isError } = useJobs('job-details');
 
   const { id } = useParams();
-  
+
   const { lg } = useBreakpoint();
 
   const titleFontSize = lg ? '28px' : '22px';
@@ -69,7 +69,7 @@ const SingleJobDetails: React.FunctionComponent = () => {
               <Link to="/jobs" className="text-black underline hover:text-gray-500 hover:underline">BACK TO ALL JOBS</Link>
             </div>
             <div className="my-5">
-              <Title level={3} style={{fontSize: titleFontSize}}>[Hiring] {jobDetails?.title} @{jobDetails?.company_name}</Title>
+              <Title level={3} style={{ fontSize: titleFontSize }}>[Hiring] {jobDetails?.title} @{jobDetails?.company_name}</Title>
               <p className="text-sm">
                 {formatDate(jobDetails?.publication_date)} - {jobDetails?.company_name} is hiring a remote {jobDetails?.title} {jobDetails?.salary ? ` 💸Salary: ${jobDetails?.salary}` : ''} 📍Location: {jobDetails?.candidate_required_location}
               </p>

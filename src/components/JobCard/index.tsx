@@ -32,7 +32,7 @@ const JobCard = ({ job }: { job: IJob }) => {
   return (
     <>
       <Col span={24}>
-        <Card className="bg-primary-300">
+        <Card className="bg-primary-300 hover:bg-primary-100 hover:transition-all hover:ease-in-out hover:delay-75">
           <Row align="middle">
             <Col xl={16} lg={14} md={14} sm={24} xs={24} className="p-5">
               <Space direction="vertical">
@@ -50,18 +50,18 @@ const JobCard = ({ job }: { job: IJob }) => {
                   <Space wrap>
                     <Tag>{job?.category}</Tag>
                     {job?.salary ? (
-                      <Tag>{truncate(job?.salary, 60)}</Tag>
+                      <Tag>{truncate(job?.salary, 20)}</Tag>
                     ) : (
                       <Tag>|-</Tag>
                     )}
-                    <Tag>{job?.candidate_required_location}</Tag>
+                    <Tag>{truncate(job?.candidate_required_location, 30)}</Tag>
                   </Space>
                 </div>
               </Space>
             </Col>
 
             <Col xl={8} lg={10} md={10} sm={24} xs={24}  className="p-5">
-              <Space>
+              <Space wrap align="center" size="large">
                 <div>
                   <p>{formatDate(job?.publication_date)}</p>
                 </div>

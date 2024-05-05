@@ -2,6 +2,7 @@ import Avatar from "./Avatar"
 import Button from "./Button"
 import FooterBox from "./Footer"
 import HeroSection from "./HeroSection"
+import InfiniteJobList from "./InfinteJobLists"
 import Input from "./TextInput"
 import JobCard from "./JobCard"
 import Modal from "./Modal"
@@ -14,6 +15,7 @@ export {
   Button,
   FooterBox,
   HeroSection,
+  InfiniteJobList,
   Input,
   JobCard,
   Modal,
