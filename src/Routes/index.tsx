@@ -10,10 +10,11 @@ import Search from '../pages/Search'
 import AllJobs from '../pages/Jobs/allJobs'
 import SingleJobDetails from '../pages/Jobs/singleJob'
 import JobCategories from '../pages/Home/components/Category/jobs'
+import ErrorBoundary from '../ErrorBoudary'
 
 const pageRoutes = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<Layout />} ErrorBoundary={ErrorBoundary}>
       <Route index element={<Home />} />
       <Route path='/search' element={<Search />} />
       <Route path='/jobs' element={<AllJobs />} />

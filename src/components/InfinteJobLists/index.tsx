@@ -1,8 +1,9 @@
 import { Fragment, FunctionComponent, useEffect, useState } from "react"
-import { Button, Col, Row } from "antd"
+import { Col, Row } from "antd"
 import { IJob, JobCardInfinteProps } from "../../types"
 import { JobCard } from "../index"
 import { useSearch } from "../../context/SearchContext"
+import { Button } from "../index"
 
 const InfiniteJobList: FunctionComponent<JobCardInfinteProps> = ({
   jobs,
